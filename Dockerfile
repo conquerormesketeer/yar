@@ -1,19 +1,17 @@
-# syntax=docker/dockerfile:1
-
+FROM debian:11
 FROM python:3.10.4-slim-buster
 
-WORKDIR /app
+WORKDIR /SiestaRobot/
 
-RUN apt-get -y update
+RUN apt-get update && apt-get upgrade -y
+RUN apt-get -y install git
+RUN python3 -m pip install -U pip
+RUN apt-get install -y wget python3-pip curl bash neofetch ffmpeg software-properties-common
 
-RUN apt-get -y install git gcc python3-dev
+COPY requirements.txt .
 
-COPY requirements.txt requirements.txt
-
-RUN pip3 install -r requirements.txt
-
-RUN pip3 install --upgrade pip
+RUN pip3 install wheel
+RUN pip3 install --no-cache-dir -U -r requirements.txt
 
 COPY . .
-
-CMD [ "python3", "-m" , "SiestaRobot"]
+CMD ["python3", "-m", "SiestaRobot"]
