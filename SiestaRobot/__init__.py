@@ -12,7 +12,6 @@ from inspect import getfullargspec
 from aiohttp import ClientSession
 from Python_ARQ import ARQ
 from telethon import TelegramClient
-from telethon.sessions import StringSession
 from telethon.sessions import MemorySession
 from pyrogram.types import Message
 from pyrogram import Client, errors
